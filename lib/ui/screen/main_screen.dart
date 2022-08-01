@@ -1,3 +1,4 @@
+import 'package:book_app/ui/screen/categories.dart';
 import 'package:book_app/ui/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final screens = [
     HomeScreen(),
+    Categories(),
   ];
   @override
   Widget build(BuildContext context) {

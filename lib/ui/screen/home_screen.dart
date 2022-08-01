@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:book_app/ui/screen/bookList.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,7 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Text('Most Popular',style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookList(name: "Fiction")));
+                                },
                                 child: Text(
                                   'See All',style: TextStyle(fontSize: 20, color: Colors.black54),
                                 ),
