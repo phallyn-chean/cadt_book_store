@@ -120,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: height / 3.4,
               //child: NovelBooks(),
             ),
+            Headline(category: "Horror", showAll: "Horror"),
             SizedBox(
               height: height / 3.4,
               //child: HorrorBooks(),
