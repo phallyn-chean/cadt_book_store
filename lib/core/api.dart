@@ -52,7 +52,7 @@ class BookApi {
       return body ;
     } 
 
-    Future getHorro () async {
+    Future getHorror () async {
       final response = await http.get(
           Uri.parse(
             "https://www.googleapis.com/books/v1/volumes?q=horroe&maxResults=39"
