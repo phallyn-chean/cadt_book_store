@@ -2,8 +2,13 @@ import 'dart:ui';
 
 import 'package:book_app/ui/screen/bookList.dart';
 import 'package:book_app/ui/screen/search_screen.dart';
+import 'package:book_app/ui/widgets/books/adventure_books.dart';
+import 'package:book_app/ui/widgets/books/anime_books.dart';
+import 'package:book_app/ui/widgets/books/horror_books.dart';
+import 'package:book_app/ui/widgets/books/novel_books.dart';
 import 'package:book_app/ui/widgets/headline.dart';
 import 'package:flutter/material.dart';
+import 'package:book_app/ui/widgets/books/popular_books.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -100,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       height: height / 5.3,
                       margin: EdgeInsets.only(left: 16),
+                      child: PopularBooks(),
                     ),
                   ),
                 ],
@@ -109,20 +116,24 @@ class _HomeScreenState extends State<HomeScreen> {
             //Headline(category = "Anime", showAll = "Anime", category: "",),
             SizedBox(
               height: height / 3.4,
+              child: AnimeBooks(),
               //child = AnimeBooks(),
             ),
             Headline(category: "Action & Adventure", showAll: "Action & Adventure"),
             SizedBox(
               height: height / 3.4,
+              child: AdventureBooks(),
               //child: AdventureBooks(),
             ),
             Headline(category: "Novel", showAll: "Novel"),
             SizedBox(height: height / 3.4,
+              child: NovelBooks(),
               //child: NovelBooks(),
             ),
             Headline(category: "Horror", showAll: "Horror"),
             SizedBox(
               height: height / 3.4,
+              child: HorrorBooks(),
               //child: HorrorBooks(),
             ),
           ],

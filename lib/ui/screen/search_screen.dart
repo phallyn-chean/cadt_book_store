@@ -1,5 +1,8 @@
+import 'package:book_app/app/notifiers/app_notifier.dart';
 import 'package:book_app/ui/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:book_app/core/model/Books.dart';
 import 'dart:math' as math;
 
 import 'package:provider/provider.dart';
@@ -30,9 +33,10 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Consumer(
+    return Consumer<AppNotifier>(
       builder: (context, value, child) {
         return FutureBuilder(
+          future: value.searchBookData(searchBook: query),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
               return Center(
@@ -49,7 +53,7 @@ class CustomSearchDelegate extends SearchDelegate {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailScreen(
-                            id: snapshot.data.items?[index].id,
+                            id: snapshot.data?.items?[index].id,
                             boxColor: Colors.lightBlue,
                           ),
                         ),
@@ -59,7 +63,7 @@ class CustomSearchDelegate extends SearchDelegate {
                       "",
                     ),
                     title: Text(
-                      "",
+                      ""
                     ),
                     subtitle: Text(""),
                   );
