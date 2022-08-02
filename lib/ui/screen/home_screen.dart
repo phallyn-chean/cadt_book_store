@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:book_app/ui/screen/bookList.dart';
+import 'package:book_app/ui/screen/search_screen.dart';
+import 'package:book_app/ui/widgets/headline.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           InkWell(
                             onTap: () {
                               //input search
+                              showSearch(context: context, delegate: CustomSearchDelegate());
                             },
                             child: Container(
                               padding: EdgeInsets.all(12),
@@ -102,33 +105,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            // Headline(
-            //   category = "Anime",
-            //   showAll = "Anime"
-            // )
+            Headline(category: "Anime", showAll: "Anime"),
+            //Headline(category = "Anime", showAll = "Anime", category: "",),
             SizedBox(
               height: height / 3.4,
               //child = AnimeBooks(),
             ),
-            // Headline(
-            //   category = "Action & Adventure",
-            //   showAll = "Action & Adventure",
-            // ),
+            Headline(category: "Action & Adventure", showAll: "Action & Adventure"),
             SizedBox(
               height: height / 3.4,
               //child: AdventureBooks(),
             ),
-            // Headline(
-            //   category = "Novel",
-            //   seeAll = "Novel",
-            // ),
+            Headline(category: "Novel", showAll: "Novel"),
             SizedBox(height: height / 3.4,
               //child: NovelBooks(),
             ),
-            // Headline(
-            //   category = "Horror",
-            //   seeAll = "Horror",
-            // ),
             SizedBox(
               height: height / 3.4,
               //child: HorrorBooks(),
