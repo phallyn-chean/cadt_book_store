@@ -37,7 +37,7 @@ class CustomSearchDelegate extends SearchDelegate {
       builder: (context, value, child) {
         return FutureBuilder(
           future: value.searchBookData(searchBook: query),
-          builder: (context, AsyncSnapshot snapshot) {
+          builder: (context, AsyncSnapshot<Books> snapshot) {
             if (snapshot.hasError) {
               return Center(
                 child: Text("Opps! Try again later!"),
@@ -45,7 +45,7 @@ class CustomSearchDelegate extends SearchDelegate {
             }
             if (snapshot.hasData) {
               return ListView.builder(
-                itemCount: snapshot.data?.items?.lenght,
+                itemCount: snapshot.data?.items?.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {
@@ -60,12 +60,12 @@ class CustomSearchDelegate extends SearchDelegate {
                       );
                     },
                     leading: Image.network(
-                      "",
+                      "${snapshot.data?.items?[index].volumeInfo?.imageLinks?.thumbnail ?? errorLink}",
                     ),
                     title: Text(
-                      ""
+                      "${snapshot.data?.items![index].volumeInfo!.authors?.length != 0 ? snapshot.data?.items![index].volumeInfo!.authors![0] : "Not Found"}"
                     ),
-                    subtitle: Text(""),
+                    subtitle: Text("${snapshot.data?.items![index].volumeInfo?.title}"),
                   );
                 },
               );

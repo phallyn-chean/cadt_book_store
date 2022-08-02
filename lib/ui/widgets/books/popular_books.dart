@@ -1,31 +1,44 @@
+import 'package:book_app/app/notifiers/app_notifier.dart';
+import 'package:book_app/core/model/Books.dart';
 import 'package:flutter/material.dart';
 import 'package:book_app/ui/screen/detail_screen.dart';
+import 'package:provider/provider.dart';
 
 class PopularBooks extends StatelessWidget {
   const PopularBooks({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var data = Provider.of<AppNotifier>(context);
     return FutureBuilder(
-      builder: (context, AsyncSnapshot snapshot){
-        if (snapshot.hasError){
+      future: data.getBookData(),
+      builder: (context, AsyncSnapshot<Books> snapshot) {
+        if (snapshot.hasError) {
           return Center(
             child: Text(
               "Opps! Try again Later!",
             ),
           );
         }
-        if (snapshot.hasData){
+        if (snapshot.hasData) {
           return LayoutBuilder(
-            builder: (context, constraints){
+            builder: (context, constraints) {
               return ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: 30,
                 physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailScreen(id: snapshot.data?.items![index].id),
+                        ),
+                      );
+                    },
                     child: Container(
                       width: constraints.maxWidth * 0.8,
                       child: Row(
@@ -36,18 +49,14 @@ class PopularBooks extends StatelessWidget {
                                 elevation: 2,
                                 margin: EdgeInsets.zero,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)
-                                ),
+                                    borderRadius: BorderRadius.circular(12)),
                                 child: Container(
                                   height: constraints.maxHeight,
                                   width: constraints.maxWidth * 0.30,
-
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Image(
-                                      image: NetworkImage(
-                                        ""
-                                      ),
+                                      image: NetworkImage("${snapshot.data?.items![index].volumeInfo?.imageLinks?.thumbnail}"),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -55,24 +64,32 @@ class PopularBooks extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(width: constraints.maxWidth * 0.03,),
+                          SizedBox(
+                            width: constraints.maxWidth * 0.03,
+                          ),
                           Expanded(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "",
-                                  style: TextStyle(fontSize: constraints.maxWidth * 0.038, color: Colors.black),
+                                  "${snapshot.data?.items![index].volumeInfo?.authors?.length != 0 ? snapshot.data?.items![index].volumeInfo?.authors![0] : "Censored"}",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.038,
+                                      color: Colors.black),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "",
-                                  style: TextStyle(fontSize: constraints.maxWidth * 0.048, color: Colors.black),
+                                  "${snapshot.data?.items![index].volumeInfo?.title}",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.048,
+                                      color: Colors.black),
                                 ),
                                 Text(
-                                  "",
-                                  style: TextStyle(fontSize: constraints.maxWidth * 0.038, color: Colors.black),
+                                  "${snapshot.data?.items![index].volumeInfo!.categories?.length != 0 ? snapshot.data?.items![index].volumeInfo!.categories![0] : "Unknown"}",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.038,
+                                      color: Colors.black),
                                 ),
                                 Spacer(),
                                 Container(
@@ -84,8 +101,9 @@ class PopularBooks extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Text(
-                                    "",
-                                    style: TextStyle(fontSize: 18, color: Colors.white),
+                                    "\$${snapshot.data?.items![index].volumeInfo?.pageCount ?? "96.9"}",
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                   ),
                                 ),
                                 Spacer(

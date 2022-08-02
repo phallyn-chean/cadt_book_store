@@ -11,9 +11,10 @@ class AdventureBooks extends StatelessWidget {
   Widget build(BuildContext context) {
     String errorlink =
         "https://img.freepik.com/free-vector/funny-error-404-background-design_1167-219.jpg?w=740&t=st=1658904599~exp=1658905199~hmac=131d690585e96267bbc45ca0978a85a2f256c7354ce0f18461cd030c5968011c";
-    var data = Provider.of(context);
+    var data = Provider.of<AppNotifier>(context);
     return FutureBuilder(
-      builder: (context, AsyncSnapshot snapshot) {
+      future: data.getAdventureBooks(),
+      builder: (context, AsyncSnapshot<Books> snapshot) {
         if (snapshot.hasError) {
           return Center(
             child: Text("Opps! Try again Later!"),
@@ -25,11 +26,17 @@ class AdventureBooks extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              itemCount: snapshot.data!.items!.lenght,
+              itemCount: snapshot.data!.items!.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DetailScreen(id: snapshot.data?.items?[index].id),
+                      ),
+                    );
                   },
                   child: Container(
                     width: constraints.maxWidth * 0.30,
@@ -49,7 +56,7 @@ class AdventureBooks extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(12),
                               child: Image(
-                                image: NetworkImage(""),
+                                image: NetworkImage("${snapshot.data?.items?[index].volumeInfo?.imageLinks?.smallThumbnail ?? errorlink}"),
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -57,6 +64,8 @@ class AdventureBooks extends StatelessWidget {
                         ),
                         Text(
                           "${snapshot.data?.items![index].volumeInfo?.title}",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontSize: constraints.maxWidth * 0.035,
                               fontWeight: FontWeight.w500,
@@ -71,7 +80,7 @@ class AdventureBooks extends StatelessWidget {
                             color: Colors.black,
                           ),
                           child: Text(
-                            "",
+                            "\$${snapshot.data?.items![index].volumeInfo?.pageCount}",
                             style: TextStyle(
                                 fontSize: constraints.maxWidth * 0.035,
                                 color: Colors.white),
