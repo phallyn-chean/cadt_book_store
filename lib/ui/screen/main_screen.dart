@@ -12,8 +12,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final screens = [
-    HomeScreen(),
-    Categories(),
+  const   HomeScreen(),
+  const    Categories(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,12 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 245, 250, 255),
+        selectedItemColor: const Color.fromARGB(255, 2, 16, 28),
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontSize: 15),
-        unselectedLabelStyle: TextStyle(fontSize: 13),
-        items: [
+        selectedLabelStyle: const TextStyle(fontSize: 15),
+        unselectedLabelStyle:const  TextStyle(fontSize: 13),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

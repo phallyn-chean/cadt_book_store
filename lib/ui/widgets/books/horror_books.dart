@@ -40,53 +40,46 @@ class HorrorBooks extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      width: constraints.maxWidth * 0.30,
-                      padding:const EdgeInsets.only(left: 16, bottom: 5, top: 5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Card(
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            child: SizedBox(
-                              height: constraints.maxHeight * 0.6,
-                              width: constraints.maxWidth * 0.25,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image(
-                                  image: NetworkImage("${snapshot.data?.items?[index].volumeInfo?.imageLinks?.thumbnail ?? errorLink}"),
-                                  fit: BoxFit.fill,
-                                ),
+                    width: constraints.maxWidth * 0.40,
+                    padding:const EdgeInsets.only(left: 16, bottom: 5, top: 5),
+                    child: Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                      children: [
+                        Card(
+                          elevation: 2,
+                          margin: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: SizedBox(
+                            height: constraints.maxHeight ,
+                            width: constraints.maxWidth * 0.40,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image(
+                                image: NetworkImage(snapshot.data?.items?[index].volumeInfo?.imageLinks?.smallThumbnail ?? errorLink),
+                                fit: BoxFit.fill,
                               ),
                             ),
                           ),
-                          Text(
-                            "${snapshot.data?.items![index].volumeInfo?.title}",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: constraints.maxWidth * 0.035,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Container(
-                            height: constraints.maxHeight * 0.1,
-                            width: constraints.maxWidth * 0.18,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Text(
-                              "\$${snapshot.data?.items![index].volumeInfo?.pageCount}",
-                              style: TextStyle(
-                                  fontSize: constraints.maxWidth * 0.035,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        
+
+                        Container(
+                                    padding: const EdgeInsets.all(5),
+                                     decoration: BoxDecoration(
+                                       color: Colors.amber ,
+                                       borderRadius: BorderRadius.circular(5)
+                                     ),
+                                     child: Text(
+                                      "\$${snapshot.data?.items![index].volumeInfo?.pageCount}",
+                                       style: const TextStyle(
+                                          fontSize: 14
+                                       ),
+                                      ),
+                                   )
+                      ],
                     ),
+                  ),
                   );
                 },
               );

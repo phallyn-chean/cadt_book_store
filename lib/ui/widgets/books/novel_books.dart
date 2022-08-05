@@ -29,11 +29,11 @@ class NovelBooks extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data!.items!.length,
-                physics:const BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      print(snapshot.data?.items?[index].id);
+                      // print(snapshot.data?.items?[index].id);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -42,55 +42,47 @@ class NovelBooks extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Container(
-                      width: constraints.maxWidth * 0.30,
-                      padding:const EdgeInsets.only(left: 16, bottom: 5, top: 5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Card(
-                            elevation: 2,
-                            margin: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                            child: SizedBox(
-                              height: constraints.maxHeight * 0.6,
-                              width: constraints.maxWidth * 0.25,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image(
-                                  image: NetworkImage("${snapshot.data?.items?[index].volumeInfo?.imageLinks?.thumbnail ?? errorLink}"),
-                                  fit: BoxFit.fill,
-                                ),
+                   child: Container(
+                    width: constraints.maxWidth * 0.40,
+                    padding:const EdgeInsets.only(left: 16, bottom: 5, top: 5),
+                    child: Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                      children: [
+                        Card(
+                          elevation: 2,
+                          margin: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          child: SizedBox(
+                            height: constraints.maxHeight ,
+                            width: constraints.maxWidth * 0.40,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image(
+                                image: NetworkImage(snapshot.data?.items?[index].volumeInfo?.imageLinks?.smallThumbnail ?? errorLink),
+                                fit: BoxFit.fill,
                               ),
                             ),
                           ),
-                          Text(
-                            "${snapshot.data?.items![index].volumeInfo?.title ?? "Censored"}",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: constraints.maxWidth * 0.035,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Container(
-                            height: constraints.maxHeight * 0.1,
-                            width: constraints.maxWidth * 0.18,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.black),
-                            child: Text(
-                              "\$${snapshot.data?.items?[index].volumeInfo?.pageCount ?? "298"}",
-                              style: TextStyle(
-                                  fontSize: constraints.maxWidth * 0.035,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        
+
+                        Container(
+                                    padding: const EdgeInsets.all(5),
+                                     decoration: BoxDecoration(
+                                       color: Colors.amber ,
+                                       borderRadius: BorderRadius.circular(5)
+                                     ),
+                                     child: Text(
+                                      "\$${snapshot.data?.items![index].volumeInfo?.pageCount}",
+                                       style: const TextStyle(
+                                          fontSize: 14
+                                       ),
+                                      ),
+                                   )
+                      ],
                     ),
+                  ),
                   );
                 },
               );

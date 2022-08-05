@@ -10,15 +10,14 @@ class AppNotifier extends ChangeNotifier {
 //Main api Books
   Future<Books> getBookData() async {
     var res = await bookApi.getBooks();
-    //print(res);
+
     var data = jsonDecode(res);
-    // print(data["items"][0]["volumeInfo"]["authors"]);
-    // data["items"];
+  
 
     return Books.fromJson(data);
   }
 
-//Anime Books
+
   Future<Books> getAnimeBooks() async {
     var res = await bookApi.getAnimeBook();
     //print(res);
@@ -30,7 +29,7 @@ class AppNotifier extends ChangeNotifier {
 //Adventure Books
   Future<Books> getAdventureBooks() async {
     var res = await bookApi.getAdventureBook();
-    //print(res);
+
     var data = jsonDecode(res);
 
     return Books.fromJson(data);
@@ -39,7 +38,7 @@ class AppNotifier extends ChangeNotifier {
   //Novel
   Future<Books> getNovelBooks() async {
     var res = await bookApi.getNovelBook();
-    //print(res);
+
     var data = jsonDecode(res);
 
     return Books.fromJson(data);

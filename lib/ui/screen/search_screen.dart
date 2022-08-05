@@ -54,7 +54,7 @@ class CustomSearchDelegate extends SearchDelegate {
                         MaterialPageRoute(
                           builder: (context) => DetailScreen(
                             id: snapshot.data?.items?[index].id,
-                            boxColor: Colors.lightBlue,
+                            boxColor: Color.fromARGB(255, 218, 229, 241),
                           ),
                         ),
                       );
@@ -105,7 +105,7 @@ class CustomSearchDelegate extends SearchDelegate {
                         MaterialPageRoute(
                           builder: (context) => DetailScreen(
                             id: snapshot.data?.items?[index].id,
-                            boxColor: Colors.lightBlue,
+                            boxColor: Color.fromARGB(255, 218, 229, 241),
                           ),
                         ),
                       );

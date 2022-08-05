@@ -38,15 +38,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: height * 350,
+                              height: height * 300,
                               child: Stack(
                                 children: [
                                   Container(
                                     width: double.maxFinite,
                                     height: height * 200,
                                     decoration: BoxDecoration(
-                                      color: widget.boxColor ?? const Color(0xffF9CFE3),
-                                      borderRadius:const BorderRadius.only(
+                                      color: widget.boxColor ??
+                                          Color.fromARGB(255, 218, 229, 241),
+                                      borderRadius: const BorderRadius.only(
                                         bottomRight: Radius.circular(35),
                                         bottomLeft: Radius.circular(35),
                                       ),
@@ -57,7 +58,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     right: 0,
                                     bottom: 0,
                                     child: Container(
-                                      height: height * 250,
+                                      height: height * 300,
                                       alignment: Alignment.center,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(12),
@@ -65,6 +66,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           image: NetworkImage(
                                               "${snapshot.data?.volumeInfo?.imageLinks?.thumbnail}"),
                                           fit: BoxFit.cover,
+                                          
                                         ),
                                       ),
                                     ),
@@ -72,31 +74,30 @@ class _DetailScreenState extends State<DetailScreen> {
                                   Positioned(
                                     top: 30,
                                     left: 16,
-                                    child: OutlinedButton.icon(
+                                    child: IconButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      style: OutlinedButton.styleFrom(
-                                          side:const BorderSide(width: 1)),
-                                      icon:const Icon(
+                                    
+                                      icon: const Icon(
                                         Icons.arrow_back,
                                         color: Colors.black,
                                       ),
-                                      label:const Text(""),
                                     ),
                                   )
                                 ],
                               ),
                             ),
                             Container(
-                              padding:const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    "${snapshot.data?.volumeInfo?.title ?? "Censored"}",
+                                    snapshot.data?.volumeInfo?.title ??
+                                        "Censored",
                                     textAlign: TextAlign.center,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -104,61 +105,21 @@ class _DetailScreenState extends State<DetailScreen> {
                                     height: 10,
                                   ),
                                   Text(
-                                    "${snapshot.data?.volumeInfo!.authors?.length != 0 ? snapshot.data?.volumeInfo!.authors![0] : "Censored"}"
-                                        .toUpperCase(),
+                                    "${snapshot.data?.volumeInfo!.authors?.length != 0 ? snapshot.data?.volumeInfo!.authors![0] : "Censored"}",
                                     textAlign: TextAlign.center,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18,
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 35),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "${snapshot.data?.volumeInfo?.printType}",
-                                          style: const TextStyle(fontSize: 18),
-                                        ),
-                                        const Spacer(
-                                          flex: 2,
-                                        ),
-                                        Container(
-                                          height: height * 35,
-                                          width: width * 80,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Text(
-                                            "\$${snapshot.data?.volumeInfo?.pageCount}",
-                                            style:
-                                                const TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Text(
-                                          "${snapshot.data?.volumeInfo?.pageCount} Pages",
-                                          style: const TextStyle(fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                
                                   const SizedBox(
                                     height: 20,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       OutlinedButton(
                                         onPressed: () async {
@@ -173,19 +134,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                           }
                                         },
                                         style: OutlinedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 6, 50, 86),
                                             side: const BorderSide(width: 1)),
-                                        child:const Text(
+                                        child: const Text(
                                           "VIEW ONLINE",
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                      ),
-                                      OutlinedButton.icon(
-                                        onPressed: () {},
-                                        icon:const Icon(
-                                            Icons.favorite_border_outlined),
-                                        label:const Text(
-                                          "WISHLIST",
-                                          style: TextStyle(fontSize: 20),
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ],
@@ -193,80 +150,84 @@ class _DetailScreenState extends State<DetailScreen> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  const Text(
-                                    "Details",
-                                    style: TextStyle(fontSize: 22),
+
+                                  const ListTile(
+                                    leading: Icon(
+                                      Icons.details_outlined,
+                                      color: Color.fromARGB(255, 138, 179, 220),
+                                      ),
+                                    title: Text(
+                                      "Details",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color:  Color.fromARGB(
+                                                    255, 6, 50, 86),
+                                        ),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: const [
-                                            Text(
-                                              "Author",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Text(
-                                              "Publisher",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Text(
-                                              "Publisher Date",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                            Text(
-                                              "Categorie",
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Expanded(
-                                          child: Column(
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: SizedBox(
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "${snapshot.data?.volumeInfo?.authors?[0]}",
+                                                "Author : ${snapshot.data?.volumeInfo?.authors?[0]}",
                                                 style: const TextStyle(
-                                                    fontSize: 16),
+                                                  fontSize: 16,
+                                                  ),
+                                              ),
+                                              SingleChildScrollView(
+                                                  scrollDirection: Axis.horizontal,
+
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    "Publisher : ${snapshot.data?.volumeInfo?.publisher}",
+                                                    style:const  TextStyle(fontSize: 16),
+                                                  ),
+                                                ),
                                               ),
                                               Text(
-                                                "${snapshot.data?.volumeInfo?.publisher}",
-                                                style: const TextStyle(
-                                                    fontSize: 16),
+                                                "Publisher Date : ${snapshot.data?.volumeInfo?.publishedDate}",
+                                                style: const TextStyle(fontSize: 16),
                                               ),
-                                              Text(
-                                                "${snapshot.data?.volumeInfo?.publishedDate}",
-                                                style: const TextStyle(
-                                                    fontSize: 16),
-                                              ),
-                                              Text(
-                                                "${snapshot.data?.volumeInfo?.categories}",
-                                                style: const TextStyle(
-                                                    fontSize: 16),
-                                              ),
+                                              
                                             ],
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(
+                                            width: 20,
+                                          ),
+                                         
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  const Text(
-                                    "Discription",
-                                    style: TextStyle(fontSize: 22),
+                                  const ListTile(
+                                    leading: Icon(
+                                      Icons.description,
+                                       color: Color.fromARGB(255, 138, 179, 220),
+                                      ),
+                                     title: Text(
+                                      "Description",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color:  Color.fromARGB(
+                                                    255, 6, 50, 86),
+                                        ),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -296,10 +257,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
-                                        primary: Colors.black),
-                                    child:const Text(
+                                        primary:const Color.fromARGB(
+                                                    255, 6, 50, 86),),
+                                    child: const Text(
                                       "Buy",
-                                      style:TextStyle(
+                                      style: TextStyle(
                                           fontSize: 20, color: Colors.white),
                                     ),
                                   ),

@@ -16,10 +16,10 @@ class BookApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AppNotifier()),
       ],
-      child: MaterialApp(
+      child:const  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'CADT Book Store',
-        home: const MainScreen(),
+        home: MainScreen(),
       ),
     );
   }
